@@ -5,6 +5,12 @@ import Alert from "./components/Alert.tsx";
 
 const App = () => {
     const [ModalShow , setModalShow] = useState(false)
+
+    const ArrayOfButtons = [
+        {type: 'primary', label: 'Continue', onClick: () => console.log('clicked continue')},
+        {type: 'danger', label: 'Close', onClick: () => console.log('clicked cancel')}
+    ];
+
     const makeFalse = () => {
       setModalShow(false)
     }
@@ -16,7 +22,7 @@ const App = () => {
     return (
         <>
             <button className={'w-25 btn btn-primary'} onClick={() => setModalShow(true)}>Модальное окно</button>
-            <Modal onClose={makeFalse} title={'Title'} show={ModalShow}><p>This is modal content</p></Modal>
+            <Modal onClose={makeFalse} title={'Title'} show={ModalShow} buttons={ArrayOfButtons}><p>This is modal content</p></Modal>
             <Alert type="success">This is a success type alert</Alert>
             <Alert type="warning" onDismiss={closeAlert}>This is a warning type alert</Alert>
             <Alert type="info" onDismiss={closeAlert}>This is a info type alert</Alert>

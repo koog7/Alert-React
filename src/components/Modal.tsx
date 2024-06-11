@@ -1,11 +1,18 @@
 import React from "react";
 
+interface ButtonsType{
+    type: string;
+    label: string;
+    onClick: VoidFunction;
+}
+
 interface Props extends React.PropsWithChildren{
     show: boolean;
     title: string;
     onClose: VoidFunction;
+    buttons: ButtonsType[];
 }
-const Modal: React.FC<Props> = ({show, title ,onClose, children}) => {
+const Modal: React.FC<Props> = ({show, title ,onClose, children,buttons}) => {
     return (
         <>
             <div className={'modal-backdrop show'} style={{display: show? 'block' : 'none'}} />
@@ -17,6 +24,11 @@ const Modal: React.FC<Props> = ({show, title ,onClose, children}) => {
                             <button className={'ms-auto'} onClick={onClose}>X</button>
                         </div>
                         {children}
+                        <div>
+                            {buttons.map((iter) => (
+                                <button style={{margin:'5px'}} key={iter.label} className={`btn btn-${iter.type}`} onClick={iter.onClick}>{iter.label}</button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
